@@ -1,3 +1,10 @@
 # Table of contents
 
-* [Synthetic-NFT-Docs](README.md)
+## Protocol
+
+* [Overview](README.md)
+* [Synthetic Assets](protocol/synthetic-assets.md)
+
+## Smart Contracts
+
+* [Architecture](smart-contracts/architecture.md)
