@@ -3,7 +3,7 @@
 ## Protocol
 
 * [Overview](README.md)
-* [Synthetic Assets](protocol/synthetic-assets.md)
+* [Synthetic Tokens (sTokens)](protocol/synthetic-tokens-stokens.md)
 
 ## Smart Contracts
 
