@@ -28,6 +28,8 @@ When a debt position is being liquidated, liquidators can purchase the minter's 
 
 ### Mint
 
+#### Mint with ETH
+
 Users can mint synthetic tokens by over-collateralizing ETH on NFTSy. The synthetic tokens then become minter's debt afterwards. Let $$Q_c$$ be the amount of collateral, let $$P_n, Q_n$$ be the floor price of the NFT collection denominated in the collateral and the number of synthetic tokens being minted. The effective collateral ratio $$r_t$$ is&#x20;
 
 $$r_t = \frac{Q_c}{P_n Q_n}$$
@@ -36,23 +38,31 @@ Minters need to make sure $$r_t > r_{min}$$, otherwise, their debt positions wil
 
 Minters can pair their synthetic tokens with ETH to provide liquidities, or directly sell their synthetic tokens to a Dex. The later is equivalent to taking a short position on the underlying NFT collection.
 
+#### Mint with NFT
+
+Users can also mint synthetic tokens 1:1 by collateralizing with NFTs from the underlying collection. For example, a BAYC can mint a synthetic BAYC token after depositing one BAYC into our vault. NFTs deposited into our vault will be locked for 30 days. Within 30 days, only the NFT  owner can redeem the NFTs by burning the corresponding amount of synthetic tokens. After 30 days, the NFTs will be unlocked and anyone can redeem the NFTs by burning synthetic tokens.
+
 ### Buy
 
 Users can buy and sell synthetic tokens on any existing decentralized exchanges like Uniswap.
 
 ### Provide Liquidity
 
-Liquidity providers can provide liquidities for synthetic tokens by acquiring synthetic tokens first, either through minting or purchasing synthetic tokens from a Dex, and then pair synthetic tokens with ETH to inject into a Dex liquidity pool.
+Liquidity providers can provide liquidities for synthetic tokens by acquiring synthetic tokens, either through minting or purchasing synthetic tokens from a Dex, and then pair synthetic tokens with ETH to inject into a liquidity pool.
 
 ### Burn
 
-Minters can burn synthetic tokens to unlock their collaterals. Let $$Q_m, Q_b$$ be the number of synthetic tokens minter has minted and attempts to burn, and let $$Q_c$$ be the number of collateral minter has deposited. The total amount of collateral unlocked $$Q_u$$ is
+Minters can burn synthetic tokens to unlock their collaterals. If minters used NFT as collateral, they redeem their NFTs after burning synthetic tokens. If minters used ETH as collateral, they redeem ETH according to the following rule.
+
+Let $$Q_m, Q_b$$ be the number of synthetic tokens minter has minted and attempts to burn, and let $$Q_c$$ be the number of collateral minter has deposited. The total amount of collateral unlocked $$Q_u$$ is
 
 $$Q_u = \frac{Q_b}{Q_m} * Q_c$$
 
 ### Liquidate
 
-A debt position with effective collateral ratio $$r_t < r_{min}$$ is subject to liquidation. Liquidators can purchase minter's collateral with a discount by burning synthetic tokens until the minter's effective collateral ratio recovers above the minimum collateral ratio again.
+Debt positions collateralized by NFTs are never subject to liquidations.
+
+A debt position collateralized by ETH with effective collateral ratio $$r_t < r_{min}$$ is subject to liquidation. Liquidators can purchase minter's collateral with a discount by burning synthetic tokens until the minter's effective collateral ratio recovers above the minimum collateral ratio again.
 
 Let $$P_n, Q_n$$ be the floor price of underlying NFT collection denominated in the collateral and the amount of debt being liquidated, let $$\gamma$$ be the discount rate where $$1 + \gamma < r_{min}$$. Then the amount of collateral bought by the liquidator is&#x20;
 
